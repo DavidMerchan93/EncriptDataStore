@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
             EncriptDataStoreTheme {
 
                 var text by remember { mutableStateOf("") }
+                val decryptedText = encryptViewModel.decryptedText.collectAsState()
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column(
@@ -64,13 +66,15 @@ class MainActivity : ComponentActivity() {
                         Button(
                             modifier = Modifier.fillMaxWidth(),
                             onClick = {
-                                text = encryptViewModel.decrypt()
+                                encryptViewModel.decrypt()
                             }
                         ) {
                             Text("Decrypt")
                         }
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(text = text, style = MaterialTheme.typography.bodyLarge)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(text = decryptedText.value, style = MaterialTheme.typography.bodyLarge)
                     }
                 }
             }

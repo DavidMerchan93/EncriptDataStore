@@ -52,5 +52,4 @@ object UserPreferencesSerializer : Serializer<UserPreferences> {
             }
         }
     }
-
 }

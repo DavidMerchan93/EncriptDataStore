@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +26,9 @@ import androidx.compose.ui.unit.dp
 import com.davidmerchan.encriptdatastore.ui.theme.EncriptDataStoreTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val encryptViewModel: EncryptViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,7 +55,7 @@ class MainActivity : ComponentActivity() {
                         Button(
                             modifier = Modifier.fillMaxWidth(),
                             onClick = {
-
+                                encryptViewModel.encrypt(text)
                             }
                         ) {
                             Text("Encrypt")
@@ -60,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         Button(
                             modifier = Modifier.fillMaxWidth(),
                             onClick = {
-
+                                text = encryptViewModel.decrypt()
                             }
                         ) {
                             Text("Decrypt")
